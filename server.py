@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from forms import SubmitObject
 
 app = Flask(__name__)
 
@@ -12,7 +13,9 @@ def index():
 
 @app.route('/homepage')
 def home():
+    form = SubmitObject()
 
+    
     return render_template('/homepage.html')
 
 if __name__ == "__main__":
