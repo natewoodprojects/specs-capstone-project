@@ -1,6 +1,6 @@
-Gechur.
+gechur.com
 
-Use your stuff. Remove your stuff. Get your money's worth. 
+Use your stuff. Remove your stuff. Gechur money's worth. 
 
 Pitch/Idea: 
     Create a web application that allows users to input items they own, how much the items cost, and how much time they want to use the item for in order to "Gechur" monies worth.  
