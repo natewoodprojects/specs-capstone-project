@@ -1,12 +1,12 @@
-Gechur.
+gechur.com
 
-Use your stuff. Remove your stuff. Get your money's worth. 
+Use your stuff. Remove your stuff. Gechur money's worth. 
 
 Pitch/Idea: 
     Create a web application that allows users to input items they own, how much the items cost, and how much time they want to use the item for in order to "Gechur" monies worth.  
 
 MVP:
-    Users can input items they own and cost of those items. 
+    Users can input items they own and cost of those items.
     Users can input how much time they've spend on specific items. 
     The application keeps track of items, and recommends items that haven't been used in a long time that the user has marked as priority.
     User can mark if items are things they want to get rid of after using them. 
@@ -18,4 +18,5 @@ MVP:
 Future Features:
     Friends feature where people can see what other people are getting rid of and ask for them. 
     Friends can give recommendations for items they've used
+    
 # specs-capstone-project
