@@ -14,17 +14,17 @@ class LoginUser(FlaskForm):
     login = SubmitField("Login")
 
 class CreateItem(FlaskForm):
-    name = StringField("Name of Item ")
-    cost = StringField("How many $ did it cost? ")
-    hours_desired = StringField("How many hours do you want to put into this? ")
-    hours_committed = StringField("How many hours have you made?")
+    item_name = StringField("Name of Item ")
+    cost_of_item = StringField("How many $ did it cost? ")
+    hours_to_use = StringField("How many hours do you want to put into this? ")
+    hours_used = StringField("How many hours have you made?")
     description = TextAreaField("Description (Optional):")
     submit = SubmitField("Create Item")
 
 class EditItem(FlaskForm):
-    name = StringField("Name of Item ")
-    cost = StringField("How many $ did it cost? ")
-    hours_desired = StringField("How many hours do you want to put into this? ")
-    hours_committed = StringField("How many hours have you made?")
+    item_name = StringField("Name of Item ")
+    cost_of_item = StringField("How many $ did it cost? ")
+    hours_to_use = StringField("How many hours do you want to put into this? ")
+    hours_used = StringField("How many hours have you made?")
     edits = SubmitField("Confirm Edits")
     

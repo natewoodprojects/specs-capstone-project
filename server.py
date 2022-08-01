@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from forms import CreateItem, EditItem, RegisterUser, LoginUser
 import jinja2
+from model import connect_to_db, User, Item, db
 
 app = Flask(__name__)
 
@@ -20,8 +21,18 @@ app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True
 @app.route('/', methods=['GET', 'POST'])
 def login():
     """First page is the login page"""
-
     form = LoginUser()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+        if not user: 
+            return redirect("/login")
+        if user.password != password:
+            return redirect("/login")
+        return render_template("/home.html")
+
     return render_template('/login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -29,6 +40,15 @@ def register():
     """Registering a user page"""
 
     form = RegisterUser()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        new_user = User(username=username, email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+    
     return render_template('/register.html', form=form)
 
 @app.route('/home', methods=['GET', 'POST'])
@@ -42,6 +62,18 @@ def create():
     """Page to create an item goal"""
 
     form = CreateItem()  
+
+    if form.validate_on_submit():
+        user_id = 1
+        item_name = form.item_name.data
+        cost_of_item = form.cost_of_item.data
+        hours_to_use = form.hours_to_use.data
+        hours_used = form.hours_used.data
+        description = form.description.data
+        new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description)
+        db.session.add(new_item)
+        db.session.commit()
+
     return render_template('/create.html', form=form)
 
 @app.route('/edit', methods=['GET', 'POST'])
@@ -54,4 +86,6 @@ def edit():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    connect_to_db(app)
+    app.env = "development" 
+    app.run(debug=True)

@@ -40,22 +40,23 @@
             <span class="icon-bar">asdfa</span>
             <span class="icon-bar">werweqre</span>
           </button>
-          <a class="navbar-brand" href="/"> gechur </a>
+          <a class="navbar-brand" href="/" style="color: white"> gechur </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="/create">Create Item</a></li>
-            <li><a href="/edit">Edit an Item</a></li>
+            <li><a href="/create" style="color: white">Create Item</a></li>
+            <li><a href="/edit" style="color: white">Edit an Item</a></li>
+            <li><a href="/home" style="color: white">Home</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if "user_id" in session %}
             <li><a href="/users/{{ session['user_id'] }}">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/logout" style="color: white">Logout</a></li>
             {% else %}
-            <li><a href="/register">Register</a></li>
-            <li><a href="/">Login</a></li>
+            <li><a href="/register" style="color: white">Register</a></li>
+            <li><a href="/" style="color: white">Login</a></li>
             {% endif %}
           </ul>
         </div>
