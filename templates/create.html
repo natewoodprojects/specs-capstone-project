@@ -1,13 +1,21 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  Create Item page!
+  Create Page
   <div>
     <form method="POST">
-      {{form.hidden_tag()}} {{form.item_name.label}} {{form.item_name()}} <br />
-      {{form.cost_of_item.label}} {{form.cost_of_item()}}
-      <br />{{form.hours_to_use.label}} {{form.hours_to_use()}}
-      <br />{{form.hours_used.label}} {{form.hours_used()}}
-      <br />{{form.description.label}} {{form.description()}} {{form.submit()}}
+      {{form.hidden_tag()}} <br />
+      {{form.item_name.label}} <br />
+      {{form.item_name()}} <br />
+      {{form.cost_of_item.label}} <br />
+      {{form.cost_of_item()}} <br />
+      {{form.hours_to_use.label}} <br />
+      {{form.hours_to_use()}} <br />
+      {{form.hours_used.label}} <br />
+      {{form.hours_used()}} <br />
+      {{form.description.label}} <br />
+      {{form.description()}} <br />
+      <br />
+      {{form.submit()}}
     </form>
 
     {% endblock %}

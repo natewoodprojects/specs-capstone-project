@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect
 from forms import CreateItem, EditItem, RegisterUser, LoginUser
 import jinja2
 from model import connect_to_db, User, Item, db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -29,7 +30,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if not user: 
             return redirect("/login")
-        if user.password != password:
+        if check_password_hash(user.password, password):
             return redirect("/login")
         return render_template("/home.html")
 
@@ -45,15 +46,25 @@ def register():
         username = form.username.data
         email = form.email.data
         password = form.password.data
+        password = generate_password_hash(password)
         new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
-    
+        return redirect('/')
+        
     return render_template('/register.html', form=form)
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():    
     """A Users main page where they see all their items they're trying to use and maybe update their items"""
+
+    '''
+    I need to:
+    Pull info from the database and display it. 
+    Have different users logged in in order to create items. 
+    '''
+
+
 
     return render_template('/home.html')
 
@@ -73,6 +84,7 @@ def create():
         new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description)
         db.session.add(new_item)
         db.session.commit()
+        return redirect("/home")
 
     return render_template('/create.html', form=form)
 

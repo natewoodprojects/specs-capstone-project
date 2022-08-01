@@ -64,7 +64,12 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
-
+    <div class="container">
+      <!-- Show flashed messages -->
+      {% with messages = get_flashed_messages() %} {% for message in messages %}
+      <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %} {% endwith %}
+    </div>
     {% block content %}{% endblock %}
   </body>
 </html>

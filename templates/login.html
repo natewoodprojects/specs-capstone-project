@@ -1,10 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-<div align="center">
-  LOGIN
+<div align="center" justify-content="left">
+  Login Page
 
   <form method="POST">
-    {{form.hidden_tag()}} {{form.username.label}} {{form.username()}}
-    {{form.password.label}} {{form.password()}} {{form.login()}}
+    {{form.hidden_tag()}} <br />
+    {{form.username.label}} <br />
+    {{form.username()}} <br />
+    {{form.password.label}} <br />
+    {{form.password()}} <br />
+    {{form.login()}}
   </form>
 </div>
 {% endblock %}
