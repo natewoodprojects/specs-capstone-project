@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, EmailField 
+from wtforms import StringField, SubmitField, PasswordField, EmailField, TextAreaField
 
 class RegisterUser(FlaskForm):
     username = StringField("Username: ")
@@ -18,6 +18,7 @@ class CreateItem(FlaskForm):
     cost = StringField("How many $ did it cost? ")
     hours_desired = StringField("How many hours do you want to put into this? ")
     hours_committed = StringField("How many hours have you made?")
+    description = TextAreaField("Description (Optional):")
     submit = SubmitField("Create Item")
 
 class EditItem(FlaskForm):
