@@ -1,7 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <div>
-  Welcome to Gechur! <br />
+  REGISTER PAGE Welcome to Gechur! <br />
   Use your stuff. Remove your stuff. Gechur money's worth.
+  <form method="POST">
+    {{form.hidden_tag()}} {{form.username.label}} {{form.username()}}
+    {{form.email.label}} {{form.email()}} {{form.password.label}}
+    {{form.password()}} {{form.confirm_password.label}}
+    {{form.confirm_password()}} {{form.register()}}
+  </form>
   <p>
     Pitch/Idea: Create a web application that allows users to input items they
     own, how much the items cost, and how much time they want to use the item
