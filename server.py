@@ -40,6 +40,13 @@ def login():
 
     return render_template('/login.html', form=form)
 
+@app.route('/logout')
+def logout():
+    
+    del session['username']
+    flash("Logged out.")
+    return redirect("/")
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():    
     """Registering a user page"""

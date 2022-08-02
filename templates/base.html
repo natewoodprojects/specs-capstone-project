@@ -47,13 +47,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            {% if "username" in session %}
             <li><a href="/create" style="color: white">Create Item</a></li>
             <li><a href="/edit" style="color: white">Edit an Item</a></li>
             <li><a href="/home" style="color: white">Home</a></li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            {% if "user_id" in session %}
-            <li><a href="/users/{{ session['user_id'] }}">Profile</a></li>
+            {% if "username" in session %}
             <li><a href="/logout" style="color: white">Logout</a></li>
             {% else %}
             <li><a href="/register" style="color: white">Register</a></li>
