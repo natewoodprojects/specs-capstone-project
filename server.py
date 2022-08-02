@@ -1,8 +1,9 @@
-from flask import Flask, render_template, session, redirect
-from forms import CreateItem, EditItem, RegisterUser, LoginUser
 import jinja2
-from model import connect_to_db, User, Item, db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, render_template, session, redirect, flash
+
+from forms import CreateItem, EditItem, RegisterUser, LoginUser
+from model import connect_to_db, User, Item, db
 
 app = Flask(__name__)
 
@@ -31,8 +32,10 @@ def login():
         if not user: 
             return redirect("/login")
         if check_password_hash(user.password, password):
-            return redirect("/login")
-        return render_template("/home.html")
+            flash("Logged in!")
+            return redirect("/home")
+        flash("Sorry, something went wrong!")
+        return redirect("/")
 
     return render_template('/login.html', form=form)
 
@@ -50,6 +53,7 @@ def register():
         new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
+        flash("User Created")
         return redirect('/')
         
     return render_template('/register.html', form=form)
@@ -64,9 +68,9 @@ def home():
     Have different users logged in in order to create items. 
     '''
 
+    items = Item.query.all()
 
-
-    return render_template('/home.html')
+    return render_template('/home.html', items=items)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():  
@@ -84,6 +88,7 @@ def create():
         new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description)
         db.session.add(new_item)
         db.session.commit()
+        flash(f"{item_name} Created")
         return redirect("/home")
 
     return render_template('/create.html', form=form)

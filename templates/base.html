@@ -17,13 +17,14 @@
       type="text/css"
     />
   </head>
-  <body>
+  <body style="background-color: white">
     <nav
       class="navbar"
       style="
         margin-bottom: 0px;
         background-color: rgb(155, 129, 94);
         color: white;
+        border-radius: 0%;
       "
     >
       <div class="container-fluid">
@@ -67,7 +68,7 @@
     <div class="container">
       <!-- Show flashed messages -->
       {% with messages = get_flashed_messages() %} {% for message in messages %}
-      <div class="alert alert-warning">{{ message }}</div>
+      <div class="alert alert-warning" role="alert">{{ message }}</div>
       {% endfor %} {% endwith %}
     </div>
     {% block content %}{% endblock %}
