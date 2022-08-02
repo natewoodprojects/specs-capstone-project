@@ -2,7 +2,7 @@ import jinja2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, session, redirect, flash
 
-from forms import CreateItem, EditItem, RegisterUser, LoginUser
+from forms import CreateItem, EditItem, RegisterUser, LoginUser, UpdateHours
 from model import connect_to_db, User, Item, db
 
 app = Flask(__name__)
@@ -32,6 +32,7 @@ def login():
         if not user: 
             return redirect("/login")
         if check_password_hash(user.password, password):
+            session['username'] = form.username.data
             flash("Logged in!")
             return redirect("/home")
         flash("Sorry, something went wrong!")
@@ -49,6 +50,13 @@ def register():
         username = form.username.data
         email = form.email.data
         password = form.password.data
+        confirm_password = form.confirm_password.data
+        if email == "":
+            flash("Please include email")
+            return redirect('/register')
+        if password != confirm_password:
+            flash("Passwords do not match")
+            return redirect('/register')
         password = generate_password_hash(password)
         new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
@@ -68,13 +76,25 @@ def home():
     Have different users logged in in order to create items. 
     '''
 
+    if 'username' not in session:
+        flash("You are not logged in.")
+        return redirect('/')
+
     items = Item.query.all()
 
-    return render_template('/home.html', items=items)
+    form = UpdateHours()
+
+    if form.validate_on_submit():
+        pass
+    return render_template('/home.html', items=items, form=form)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():  
     """Page to create an item goal"""
+
+    if 'username' not in session:
+        flash("You are not logged in.")
+        return redirect('/')
 
     form = CreateItem()  
 
@@ -96,6 +116,9 @@ def create():
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():   
 
+    if 'username' not in session:
+        flash("You are not logged in.")
+        return redirect('/')
 
     form = EditItem() 
     return render_template('/edit.html', form=form)

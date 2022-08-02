@@ -13,8 +13,12 @@
       Used: {{item.hours_used}} hours <br />
       Completed: {{item.completed}} <br />
       Donated: {{item.given_away}} <br />
-
       <div>Description: {{item.description or "N/A"}}</div>
+      <form method="POST">
+        {{form.new_hours.label}} <br />
+        {{form.new_hours()}} <br />
+        {{form.update}} <br />
+      </form>
     </div>
 
     {% endfor %}

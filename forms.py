@@ -27,4 +27,7 @@ class EditItem(FlaskForm):
     hours_to_use = StringField("How many hours do you want to put into this? ")
     hours_used = StringField("How many hours have you made?")
     edits = SubmitField("Confirm Edits")
-    
+
+class UpdateHours(FlaskForm):
+    new_hours = StringField("How many hours now?") 
+    update = SubmitField("Update")   
