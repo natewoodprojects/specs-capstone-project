@@ -33,6 +33,7 @@ class Item(db.Model):
     completed = db.Column(db.Boolean)
     given_away = db.Column(db.Boolean)
     description = db.Column(db.Text, nullable=True)
+    photo = db.Column(db.Text, nullable=True)
 
 
 def connect_to_db(app):

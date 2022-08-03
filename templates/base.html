@@ -41,7 +41,11 @@
             <span class="icon-bar">asdfa</span>
             <span class="icon-bar">werweqre</span>
           </button>
+          {% if "username" in session %}
+          <a class="navbar-brand" href="/home" style="color: white"> gechur </a>
+          {% else %}
           <a class="navbar-brand" href="/" style="color: white"> gechur </a>
+          {% endif %}
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

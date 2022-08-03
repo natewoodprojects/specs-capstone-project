@@ -87,7 +87,10 @@ def home():
         flash("You are not logged in.")
         return redirect('/')
 
-    items = Item.query.all()
+    user_file = (User.query.filter_by(username=(session['username'])).one())
+    user_id = user_file.user_id
+
+    items = Item.query.filter_by(user_id=user_id)
 
     form = UpdateHours()
 
@@ -106,7 +109,10 @@ def create():
     form = CreateItem()  
 
     if form.validate_on_submit():
-        user_id = 1
+
+        user_file = (User.query.filter_by(username=(session['username'])).one())
+        user_id = user_file.user_id
+
         item_name = form.item_name.data
         cost_of_item = form.cost_of_item.data
         hours_to_use = form.hours_to_use.data
