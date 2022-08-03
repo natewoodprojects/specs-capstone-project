@@ -138,17 +138,6 @@ def edit_item(item_id):
     form = EditItem() 
     return render_template('/edit.html', form=form)
 
-@app.route('/edit', methods=['GET', 'POST'])
-def edit():   
-
-    if 'username' not in session:
-        flash("You are not logged in.")
-        return redirect('/')
-
-    form = EditItem() 
-    return render_template('/edit.html', form=form)
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     app.env = "development" 
