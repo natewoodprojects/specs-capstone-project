@@ -124,6 +124,8 @@ def create():
 @app.route('/edit/<item_id>', methods=['GET', 'POST'])
 def edit_item(item_id):   
     
+    '''Fully Functional edit file'''
+
     form = EditItem() 
 
     if 'username' not in session:
