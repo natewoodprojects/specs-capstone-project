@@ -1,7 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  Create Page
-  <div>
+  <div
+    style="
+      background-color: #01acdd;
+      border: 1px solid black;
+      margin: 5px;
+      width: 300px;
+      color: black;
+      border-radius: 5px;
+    "
+  >
     <form method="POST">
       {{form.hidden_tag()}} <br />
       {{form.item_name.label}} <br />
@@ -10,15 +18,13 @@
       {{form.cost_of_item()}} <br />
       {{form.hours_to_use.label}} <br />
       {{form.hours_to_use()}} <br />
-      {{form.hours_used.label}} <br />
-      {{form.hours_used()}} <br />
       {{form.description.label}} <br />
       {{form.description()}} <br />
       {{form.photo.label}} <br />
       {{form.photo()}} <br />
-
       <br />
-      {{form.submit()}}
+      {{form.submit()}} <br />
+      <br />
     </form>
 
     {% endblock %}

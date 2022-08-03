@@ -4,16 +4,25 @@
     {% for item in items %}
     <div
       class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
-      style="border: 2px solid black; margin: 5px; max-width: 30%; color: black"
+      style="
+        background-color: #01acdd;
+        border: 1px solid black;
+        margin: 5px;
+        max-width: 30%;
+        color: black;
+        border-radius: 5px;
+      "
     >
       {{ item.item_name }} <br />
-      <img src="{{item.photo}}" alt="photo" style="max-width: 90%" />
+      <img src="{{item.photo}}" alt="photo" style="width: 90%" /> <br />
       Cost: ${{item.cost_of_item}} <br />
       Goal: {{item.hours_to_use}} hours<br />
       Used: {{item.hours_used}} hours <br />
       Completed: {{item.completed}} <br />
       Donated: {{item.given_away}} <br />
-      <div>Description: {{item.description or "N/A"}}</div>
+      {% if item.description != None %}
+      <div>Description: {{item.description}}</div>
+      {% endif %}
       <form method="POST">
         {{form.new_hours.label}} <br />
         {{form.new_hours()}} <br />

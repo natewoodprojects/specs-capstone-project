@@ -116,9 +116,9 @@ def create():
         item_name = form.item_name.data
         cost_of_item = form.cost_of_item.data
         hours_to_use = form.hours_to_use.data
-        hours_used = form.hours_used.data
         description = form.description.data
-        new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description)
+        photo = form.photo.data
+        new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description, photo=photo)
         db.session.add(new_item)
         db.session.commit()
         flash(f"{item_name} Created")
