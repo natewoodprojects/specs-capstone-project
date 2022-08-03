@@ -6,8 +6,9 @@
       class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
       style="
         background-color: #01acdd;
-        border: 1px solid black;
+        border: 1px solid grey;
         margin: 5px;
+        padding: 5px;
         max-width: 30%;
         color: black;
         border-radius: 5px;
@@ -23,10 +24,11 @@
       {% if item.description != None %}
       <div>Description: {{item.description}}</div>
       {% endif %}
-      <form method="POST">
+      <!-- <form method="POST" >
         {{form.new_hours.label}} <br />
         {{form.new_hours()}} <br />
-        {{form.update}} <br />
+        <button>{{form.update}}</button><br /> -->
+        <button ><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
       </form>
     </div>
 

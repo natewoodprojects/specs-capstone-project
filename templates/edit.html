@@ -1,17 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  Edit Page
-
-  <form method="POST">
-    {{form.hidden_tag()}} <br />
-    {{form.item_name.label}} <br />
-    {{form.item_name()}} <br />
-    {{form.cost_of_item.label}} <br />
-    {{form.cost_of_item()}}<br />
-    {{form.hours_to_use.label}} <br />
-    {{form.hours_to_use()}}<br />
-    <br />
-    {{form.edits()}}
-  </form>
+  <div
+    style="
+      background-color: #01acdd;
+      border: 1px solid black;
+      margin: 5px;
+      padding: 5px;
+      width: 300px;
+      color: black;
+      border-radius: 5px;
+    "
+  >
+    <form method="POST">
+      {{form.hidden_tag()}} {{form.item_name.label}} <br />
+      {{form.item_name()}} <br />
+      {{form.cost_of_item.label}} <br />
+      {{form.cost_of_item()}}<br />
+      {{form.hours_to_use.label}} <br />
+      {{form.hours_to_use()}}<br />
+      <br />
+      {{form.edits()}}
+    </form>
+  </div>
 </div>
 {% endblock %}

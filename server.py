@@ -33,9 +33,9 @@ def login():
             return redirect("/login")
         if check_password_hash(user.password, password):
             session['username'] = form.username.data
-            flash("Logged in!")
+            flash("Logged in!", "success")
             return redirect("/home")
-        flash("Sorry, something went wrong!")
+        flash("Sorry, something went wrong!", "success")
         return redirect("/")
 
     return render_template('/login.html', form=form)
@@ -44,7 +44,7 @@ def login():
 def logout():
     
     del session['username']
-    flash("Logged out.")
+    flash("Logged out.", "success")
     return redirect("/")
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -126,6 +126,18 @@ def create():
 
     return render_template('/create.html', form=form)
 
+@app.route('/edit/<item_id>', methods=['GET', 'POST'])
+def edit_item(item_id):   
+    
+    if 'username' not in session:
+        flash("You are not logged in.")
+        return redirect('/')
+
+    item_id 
+
+    form = EditItem() 
+    return render_template('/edit.html', form=form)
+
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():   
 
@@ -135,7 +147,6 @@ def edit():
 
     form = EditItem() 
     return render_template('/edit.html', form=form)
-
 
 
 if __name__ == "__main__":
