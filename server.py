@@ -4,6 +4,7 @@ from flask import Flask, render_template, session, redirect, flash
 
 from forms import CreateItem, EditItem, RegisterUser, LoginUser, UpdateHours
 from model import connect_to_db, User, Item, db
+from sqlalchemy import update
 
 app = Flask(__name__)
 
@@ -77,12 +78,6 @@ def register():
 def home():    
     """A Users main page where they see all their items they're trying to use and maybe update their items"""
 
-    '''
-    I need to:
-    Pull info from the database and display it. 
-    Have different users logged in in order to create items. 
-    '''
-
     if 'username' not in session:
         flash("You are not logged in.")
         return redirect('/')
@@ -121,7 +116,7 @@ def create():
         new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description, photo=photo)
         db.session.add(new_item)
         db.session.commit()
-        flash(f"{item_name} Created")
+        flash(f"{item_name} Created", "Success")
         return redirect("/home")
 
     return render_template('/create.html', form=form)
@@ -129,14 +124,38 @@ def create():
 @app.route('/edit/<item_id>', methods=['GET', 'POST'])
 def edit_item(item_id):   
     
+    form = EditItem() 
+
     if 'username' not in session:
         flash("You are not logged in.")
         return redirect('/')
+    
+    item_file = (Item.query.filter_by(item_id=item_id).one())
 
-    item_id 
+    if form.validate_on_submit():
+        item_file = Item.query.filter_by(item_id=item_id).one()
+        item_file.hours_used = int(form.hours_to_use.data)
+        
+        db.session.add(item_file)
+        db.session.commit()
+        return redirect('/home')
 
-    form = EditItem() 
-    return render_template('/edit.html', form=form)
+    title = item_file.item_name
+
+    return render_template('/edit.html', form=form, title=title)
+
+@app.route('/delete/<item_id>', methods=['GET', 'POST'])
+def delete(item_id):   
+    
+    if 'username' not in session:
+        flash("You are not logged in.")
+        return redirect('/')
+    
+    item_file = (Item.query.filter_by(item_id=item_id).one())
+    db.session.delete(item_file)
+    db.session.commit()
+
+    return redirect('/home')
 
 if __name__ == "__main__":
     connect_to_db(app)
