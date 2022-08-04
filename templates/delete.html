@@ -11,8 +11,12 @@
       border-radius: 5px;
     "
   >
+    You sure you want to delete {{item_name}}?
     <button>
-      <!-- <a method="POST" href="/delete/{{item_id}}">Delete</a> -->
+      <a method="POST" href="/delete/{{item_id}}">Yes</a>
+    </button>
+    <button>
+      <a method="POST" href="/home">No</a>
     </button>
   </div>
 </div>

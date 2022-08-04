@@ -25,7 +25,7 @@ class CreateItem(FlaskForm):
 class EditItem(FlaskForm):
     item_name = StringField("Name of Item ")
     cost_of_item = StringField("How many $ did it cost? ")
-    hours_to_use = StringField("How many hours do you want to put into this? ")
+    hours_to_use = StringField("How many hours to add to your total? ")
     edits = SubmitField("Confirm Edits")
     photo = StringField()
 

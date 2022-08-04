@@ -25,7 +25,7 @@
       Description: {{item.description or None}} <br />
       <button><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
       <button>
-        <a method="POST" href="/delete/{{item.item_id}}">Delete</a>
+        <a method="POST" href="/delete-page/{{item.item_id}}">Delete</a>
       </button>
     </div>
     {% endfor %}

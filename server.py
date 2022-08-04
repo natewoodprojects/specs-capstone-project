@@ -136,7 +136,7 @@ def edit_item(item_id):
 
     if form.validate_on_submit():
         item_file = Item.query.filter_by(item_id=item_id).one()
-        item_file.hours_used = int(form.hours_to_use.data)
+        item_file.hours_used = int(item_file.hours_used) + int(form.hours_to_use.data)
         
         db.session.add(item_file)
         db.session.commit()
@@ -159,10 +159,14 @@ def delete(item_id):
 
     return redirect('/home')
 
-# @app.route("/delete-page", methods=['GET', 'POST'])
-# def delete_page():
+@app.route("/delete-page/<item_id>", methods=['GET', 'POST'])
+def delete_page(item_id):
     
-#     return render_template("/delete.html")
+
+    item_file = Item.query.filter_by(item_id=item_id).one()
+    item_name = item_file.item_name
+
+    return render_template("/delete.html", item_id=item_id, item_name=item_name)
 
 
 if __name__ == "__main__":
