@@ -159,7 +159,21 @@ def delete(item_id):
 
     return redirect('/home')
 
+# @app.route("/delete-page", methods=['GET', 'POST'])
+# def delete_page():
+    
+#     return render_template("/delete.html")
+
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.env = "development" 
     app.run(debug=True)
+
+
+
+
+
+    """  Register Page <br />
+  Welcome to Gechur! <br />
+  Use your stuff. Remove your stuff. Gechur money's worth."""

@@ -14,41 +14,21 @@
         border-radius: 5px;
       "
     >
-      {{ item.item_name }} <br />
-      <img src="{{item.photo}}" alt="photo" style="width: 90%" /> <br />
+      <h1>{{ item.item_name }}</h1>
+      <br />
+      <img src="{{item.photo}}" alt="" style="width: 90%" /> <br />
       Cost: ${{item.cost_of_item}} <br />
       Goal: {{item.hours_to_use}} hours<br />
       Used: {{item.hours_used}} hours <br />
       Completed: {{item.completed}} <br />
       Donated: {{item.given_away}} <br />
-      {% if item.description != None %}
-      <div>Description: {{item.description}}</div>
-      {% endif %}
-      <!-- <form method="POST" >
-        {{form.new_hours.label}} <br />
-        {{form.new_hours()}} <br />
-        <button>{{form.update}}</button><br /> -->
-        <button ><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
-        <button ><a method="POST" href="/delete/{{item.item_id}}">Delete</a></button>
-      </form>
+      Description: {{item.description or None}} <br />
+      <button><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
+      <button>
+        <a method="POST" href="/delete/{{item.item_id}}">Delete</a>
+      </button>
     </div>
-
     {% endfor %}
   </div>
 </div>
 {% endblock %}
-
-<!-- 
- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 melon-summary">
-
-              <div class="well">
-                  <h3><a href="/melon/{{ melon.melon_id }}">{{ melon.common_name }}</a></h3>
-                  <a href="/melon/{{ melon.melon_id }}">
-                      <img src="{{ melon.image_url }}" class="img-circle">
-                  </a>
-
-                  <div class="price">{{ melon.price_str() }}</div>
-                  <a class="btn btn-primary" href="/melon/{{ melon.melon_id }}">Details</a>
-              </div>
-
-          </div> -->

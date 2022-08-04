@@ -1,20 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  Register Page <br />
-  Welcome to Gechur! <br />
-  Use your stuff. Remove your stuff. Gechur money's worth.
-  <form method="POST">
-    {{form.hidden_tag()}} <br />
-    {{form.username.label}} <br />
-    {{form.username()}} <br />
-    {{form.email.label}} <br />
-    {{form.email()}} <br />
-    {{form.password.label}} <br />
-    {{form.password()}} <br />
-    {{form.confirm_password.label}} <br />
-    {{form.confirm_password()}} <br />
-    <br />
-    {{form.register()}}
-  </form>
+  <div
+    style="
+      background-color: #01acdd;
+      border: 1px solid black;
+      margin: 5px;
+      padding: 5px;
+      max-width: 300px;
+      color: black;
+      border-radius: 5px;
+      align-items: center;
+    "
+  >
+    <form method="POST">
+      {{form.hidden_tag()}} <br />
+      {{form.username.label}} <br />
+      {{form.username()}} <br />
+      {{form.email.label}} <br />
+      {{form.email()}} <br />
+      {{form.password.label}} <br />
+      {{form.password()}} <br />
+      {{form.confirm_password.label}} <br />
+      {{form.confirm_password()}} <br />
+      <br />
+      {{form.register()}}
+    </form>
+  </div>
 </div>
 {% endblock %}
