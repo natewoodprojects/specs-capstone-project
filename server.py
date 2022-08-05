@@ -1,3 +1,8 @@
+"""
+gechur is a web application that allowes its users to register a profile, add items to their home, update the number of hours they've used them, and view other people's items. The end goal is to give users a quilt free conscience from the items they've spent money on. 
+"""
+
+
 import jinja2, random
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, session, redirect, flash
@@ -8,17 +13,8 @@ from sqlalchemy import update
 
 app = Flask(__name__)
 
-# A secret key is needed to use Flask sessioning features
 app.secret_key = "39p4uhgau-ewvhoruawe4-9gfhap34u9bp-upsdzv923"
-
-# Normally, if you refer to an undefined variable in a Jinja template,
-# Jinja silently ignores this. This makes debugging difficult, so we'll
-# set an attribute of the Jinja environment that says to make this an
-# error.
 app.jinja_env.undefined = jinja2.StrictUndefined
-
-# This configuration option makes the Flask interactive debugger
-# more useful (you should remove this line in production though)
 app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True
 
 @app.route('/', methods=['GET', 'POST'])
@@ -43,6 +39,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """Ends the user session"""
     
     del session['username']
     flash("Logged out.", "success")
@@ -104,10 +101,9 @@ def create():
     form = CreateItem()  
 
     if form.validate_on_submit():
-        """Setting the user_id in the foreign key category for the item"""
+
         user_file = (User.query.filter_by(username=(session['username'])).one())
         user_id = user_file.user_id
-
         item_name = form.item_name.data
         cost_of_item = form.cost_of_item.data
         hours_to_use = form.hours_to_use.data
@@ -126,9 +122,7 @@ def create():
 def view_all():
 
     users = User.query.all()
-
     items = (Item.query.all())
-    print(items)
     return render_template('/view-all.html', items=items, users=users)
 
 @app.route('/edit/<item_id>', methods=['GET', 'POST'])
