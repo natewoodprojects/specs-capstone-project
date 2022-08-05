@@ -36,7 +36,7 @@ def login():
             session['username'] = form.username.data
             flash("Logged in!", "success")
             return redirect("/home")
-        flash("Sorry, something went wrong!", "success")
+        flash("Sorry, something went wrong!", "warning")
         return redirect("/")
 
     return render_template('/login.html', form=form)
@@ -60,16 +60,16 @@ def register():
         password = form.password.data
         confirm_password = form.confirm_password.data
         if email == "":
-            flash("Please include email")
+            flash("Please include email", 'warning')
             return redirect('/register')
         if password != confirm_password:
-            flash("Passwords do not match")
+            flash("Passwords do not match", 'warning')
             return redirect('/register')
         password = generate_password_hash(password)
         new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
-        flash("User Created")
+        flash("User Created", "success")
         return redirect('/')
         
     return render_template('/register.html', form=form)
@@ -79,7 +79,7 @@ def home():
     """A Users main page where they see all their items they're trying to use and update their items"""
 
     if 'username' not in session:
-        flash("You are not logged in.")
+        flash("You are not logged in.", "warning")
         return redirect('/')
 
     user_file = (User.query.filter_by(username=(session['username'])).one())
@@ -98,7 +98,7 @@ def create():
     """Page to create an item goal"""
 
     if 'username' not in session:
-        flash("You are not logged in.")
+        flash("You are not logged in.", "warning")
         return redirect('/')
 
     form = CreateItem()  
@@ -139,7 +139,7 @@ def edit_item(item_id):
     form = EditItem() 
 
     if 'username' not in session:
-        flash("You are not logged in.")
+        flash("You are not logged in.", "warning")
         return redirect('/')
 
     item_file = (Item.query.filter_by(item_id=item_id).one())
@@ -170,7 +170,7 @@ def edit_item(item_id):
 def delete(item_id):   
     
     if 'username' not in session:
-        flash("You are not logged in.")
+        flash("You are not logged in.", "warning")
         return redirect('/')
     
     item_file = (Item.query.filter_by(item_id=item_id).one())
