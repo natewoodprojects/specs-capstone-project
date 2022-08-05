@@ -24,10 +24,6 @@
       Completed: {{item.completed}} <br />
       Donated: {{item.given_away}} <br />
       Description: {{item.description or None}} <br />
-      <button><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
-      <button>
-        <a method="POST" href="/delete-page/{{item.item_id}}">Delete</a>
-      </button>
     </div>
     {% endfor %}
   </div>

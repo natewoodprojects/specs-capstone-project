@@ -20,6 +20,8 @@
   <body
     style="
       background-image: url('https://wallpaperaccess.com/full/242893.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     "
   >
@@ -58,8 +60,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             {% if "username" in session %}
-            <li><a href="/create" style="color: white">Create</a></li>
             <li><a href="/home" style="color: white">Home</a></li>
+            <li><a href="/create" style="color: white">Create</a></li>
+            <li><a href="/view-all" style="color: white">Public</a></li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

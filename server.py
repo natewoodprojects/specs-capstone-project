@@ -1,4 +1,4 @@
-import jinja2
+import jinja2, random
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, session, redirect, flash
 
@@ -76,7 +76,7 @@ def register():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():    
-    """A Users main page where they see all their items they're trying to use and maybe update their items"""
+    """A Users main page where they see all their items they're trying to use and update their items"""
 
     if 'username' not in session:
         flash("You are not logged in.")
@@ -104,7 +104,7 @@ def create():
     form = CreateItem()  
 
     if form.validate_on_submit():
-
+        """Setting the user_id in the foreign key category for the item"""
         user_file = (User.query.filter_by(username=(session['username'])).one())
         user_id = user_file.user_id
 
@@ -116,10 +116,20 @@ def create():
         new_item = Item(user_id=user_id, item_name=item_name, cost_of_item=cost_of_item, hours_to_use=hours_to_use, hours_used=0, completed=False, given_away=False, description=description, photo=photo)
         db.session.add(new_item)
         db.session.commit()
-        flash(f"{item_name} Created", "Success")
+        flash(f"{item_name} Created", "success")
         return redirect("/home")
 
     return render_template('/create.html', form=form)
+
+
+@app.route("/view-all", methods=['GET', 'POST'])
+def view_all():
+
+    users = User.query.all()
+
+    items = (Item.query.all())
+    print(items)
+    return render_template('/view-all.html', items=items, users=users)
 
 @app.route('/edit/<item_id>', methods=['GET', 'POST'])
 def edit_item(item_id):   
@@ -131,6 +141,16 @@ def edit_item(item_id):
     if 'username' not in session:
         flash("You are not logged in.")
         return redirect('/')
+
+    item_file = (Item.query.filter_by(item_id=item_id).one())
+    item_user_id = item_file.user_id
+    
+    user_file = (User.query.filter_by(username=(session['username'])).one())
+    user_id = user_file.user_id
+
+    if user_id != item_user_id:
+        flash("That's not your item, how'd you do that?", "warning")
+        return redirect('/home')
     
     item_file = (Item.query.filter_by(item_id=item_id).one())
 
@@ -153,6 +173,15 @@ def delete(item_id):
         flash("You are not logged in.")
         return redirect('/')
     
+    item_file = (Item.query.filter_by(item_id=item_id).one())
+    item_user_id = item_file.user_id
+    
+    user_file = (User.query.filter_by(username=(session['username'])).one())
+    user_id = user_file.user_id
+
+    if user_id != item_user_id:
+        flash("This is not your item, how did you get here?", "warning")
+
     item_file = (Item.query.filter_by(item_id=item_id).one())
     db.session.delete(item_file)
     db.session.commit()
