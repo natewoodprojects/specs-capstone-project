@@ -154,6 +154,13 @@ def edit_item(item_id):
         
         db.session.add(item_file)
         db.session.commit()
+
+        if item_file.hours_used > item_file.hours_to_use:
+            item_file.completed = True
+            db.session.add(item_file)
+            db.session.commit()
+            flash(f"Congrats! You completed your hourly goal for {item_file.item_name}! Think about giving it away or something!", "success")
+
         return redirect('/home')
 
     title = item_file.item_name
