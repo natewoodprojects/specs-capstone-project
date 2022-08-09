@@ -18,6 +18,9 @@ app.secret_key = os.environ["SECRET_KEY"]
 app.jinja_env.undefined = jinja2.StrictUndefined
 app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URI"]
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 Migrate(app, db)
 
 @app.route('/', methods=['GET', 'POST'])
