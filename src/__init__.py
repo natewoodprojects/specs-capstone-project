@@ -2,20 +2,23 @@
 gechur is a web application that allowes its users to register a profile, add items to their home, update the number of hours they've used them, and view other people's items. The end goal is to give users a quilt free conscience from the items they've spent money on. 
 """
 
-
-import jinja2, random
+import jinja2, random, os
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, session, redirect, flash
-
-from forms import CreateItem, EditItem, RegisterUser, LoginUser, UpdateHours
-from model import connect_to_db, User, Item, db
 from sqlalchemy import update
+from flask_migrate import Migrate
+
+from .forms import CreateItem, EditItem, RegisterUser, LoginUser, UpdateHours
+from .model import connect_to_db, User, Item, db
+
 
 app = Flask(__name__)
 
-app.secret_key = "39p4uhgau-ewvhoruawe4-9gfhap34u9bp-upsdzv923"
+app.secret_key = os.environ["SECRET_KEY"]
 app.jinja_env.undefined = jinja2.StrictUndefined
 app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True
+
+Migrate(app, db)
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
