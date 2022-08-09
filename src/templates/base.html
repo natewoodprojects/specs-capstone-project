@@ -45,12 +45,19 @@
             data-target="#bs-example-navbar-collapse-1"
           >
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar">thing</span>
-            <span class="icon-bar">asdfa</span>
-            <span class="icon-bar">werweqre</span>
+            {% if "username" in session %}
+            <a href="/logout" style="color: white">Logout</a>
+            {% else %}
+            <a href="/register" style="color: white">Register</a>
+            {% endif %}
           </button>
+
           {% if "username" in session %}
           <a class="navbar-brand" href="/home" style="color: white"> gechur </a>
+          <a class="navbar-brand" href="/create" style="color: white">Create</a>
+          <a class="navbar-brand" href="/view-all" style="color: white"
+            >Public</a
+          >
           {% else %}
           <a class="navbar-brand" href="/" style="color: white"> gechur </a>
           {% endif %}

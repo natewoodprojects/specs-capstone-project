@@ -1,34 +1,42 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  <div>
-    {% for item in items %}
-    <div
-      class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
-      style="
-        background-color: #01acdd;
-        border: 1px solid grey;
-        margin: 5px;
-        padding: 5px;
-        max-width: 32%;
-        color: black;
-        border-radius: 5px;
-      "
-    >
-      <h1>{{ item.item_name }}</h1>
-      <br />
-      <img src="{{item.photo}}" alt="" style="max-width: 90%; height: 300px" />
-      <br />
-      Cost: ${{item.cost_of_item}} <br />
-      Goal: {{item.hours_to_use}} hours<br />
-      Used: {{item.hours_used}} hours <br />
-      Completed: {{item.completed}} <br />
-      Description: {{item.description or None}} <br />
-      <button><a method="POST" href="/edit/{{item.item_id}}">Update</a></button>
-      <button>
-        <a method="POST" href="/delete-page/{{item.item_id}}">Delete</a>
-      </button>
+  <div class="container-fluid">
+    <div>
+      {% for item in items %}
+      <div
+        class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
+        style="
+          background-color: #01acdd;
+          border: 1px solid grey;
+          margin: 5px;
+          padding: 5px;
+          max-width: 90%;
+          color: black;
+          border-radius: 5px;
+        "
+      >
+        <h1>{{ item.item_name }}</h1>
+        <br />
+        <img
+          src="{{item.photo}}"
+          alt=""
+          style="max-width: 90%; height: 300px"
+        />
+        <br />
+        Cost: ${{item.cost_of_item}} <br />
+        Goal: {{item.hours_to_use}} hours<br />
+        Used: {{item.hours_used}} hours <br />
+        Completed: {{item.completed}} <br />
+        Description: {{item.description or None}} <br />
+        <button>
+          <a method="POST" href="/edit/{{item.item_id}}">Update</a>
+        </button>
+        <button>
+          <a method="POST" href="/delete-page/{{item.item_id}}">Delete</a>
+        </button>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 {% endblock %}
