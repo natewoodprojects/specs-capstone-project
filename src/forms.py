@@ -33,3 +33,6 @@ class EditItem(FlaskForm):
 class UpdateHours(FlaskForm):
     new_hours = StringField("How many hours now?") 
     update = SubmitField("Update")   
+
+
+"""This is a robbery. """
