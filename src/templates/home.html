@@ -1,28 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 <div align="center">
-  <div class="container-fluid">
-    <div>
+  <div class="container-fluid" style="display: flex; justify-content: center">
+    <div style="display: flex; justify-content: center; flex-wrap: wrap">
       {% for item in items %}
       <div
-        class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
+        class="col-xs-12 col-sm-5 col-md-4 col-lg-3"
         style="
           background-color: #01acdd;
           border: 1px solid grey;
           margin: 5px;
           padding: 5px;
           max-width: 90%;
+          height: auto;
           color: black;
           border-radius: 5px;
         "
       >
-        <h1>{{ item.item_name }}</h1>
+        <h1 style="font-size: 32px">{{ item.item_name }}</h1>
         <br />
         <img
           src="{{item.photo}}"
           alt=""
-          style="max-width: 90%; height: 300px"
+          style="max-width: 90%; min-width: 50%"
         />
         <br />
+
         Cost: ${{item.cost_of_item}} <br />
         Goal: {{item.hours_to_use}} hours<br />
         Used: {{item.hours_used}} hours <br />
@@ -39,4 +41,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
