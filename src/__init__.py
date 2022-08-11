@@ -35,12 +35,13 @@ def login():
         password = form.password.data
         user = User.query.filter_by(username=username).first()
         if not user: 
-            return redirect("/login")
+            flash("Username or password incorrect!", "warning")
+            return redirect("/")
         if check_password_hash(user.password, password):
             session['username'] = form.username.data
             flash("Logged in!", "success")
             return redirect("/home")
-        flash("Sorry, something went wrong!", "warning")
+        flash("Username or password incorrect!", "warning")
         return redirect("/")
 
     return render_template('/login.html', form=form)
